@@ -1,0 +1,19 @@
+{
+	"ImportPath": "github.com/evilspacehamster/tharsis",
+	"GoVersion": "go1.6",
+	"GodepVersion": "v62",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/russross/blackfriday",
+			"Comment": "v1.4-26-g151efb0",
+			"Rev": "151efb040f183f3b968215a236c71a2614b62879"
+		},
+		{
+			"ImportPath": "github.com/shurcooL/sanitized_anchor_name",
+			"Rev": "10ef21a441db47d8b13ebcc5fd2310f636973c77"
+		}
+	]
+}
