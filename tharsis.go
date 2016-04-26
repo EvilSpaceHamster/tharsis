@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -14,8 +15,16 @@ var root string
 func main() {
 	fmt.Println("Tharsis Documentation Service")
 
-	root = "/Users/ali/mockumentation/src"
-	filepath.Walk(root, visit)
+	src := flag.String("src", "", "Source directory for markdown documentation")
+	// out := flag.String("out", "", "HTML Output directory")
+	flag.Parse()
+
+	if *src == "" {
+		fmt.Println("src directory is required")
+		return
+	}
+
+	filepath.Walk(*src, visit)
 }
 
 func visit(path string, f os.FileInfo, err error) error {
