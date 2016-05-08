@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -16,7 +15,7 @@ var paths []string
 
 var root string
 
-var docs map[string]string
+var docs map[string]*article.Article
 
 var docMutex *sync.RWMutex
 
@@ -49,11 +48,11 @@ func processFile(path string, f os.FileInfo, err error) error {
 }
 
 func parseMarkdownFile(filename, relativeName string) {
-	bytes, err := ioutil.ReadFile(filename)
+	article, err := article.NewArticleFromMarkdownFile(filename)
 	if err != nil {
-		fmt.Printf("error reading file '%s': %s\n", filename, err)
+		fmt.Println(err)
+		return
 	}
-	docMutex.Lock()
-	defer docMutex.Unlock()
-	docs[relativeName] = article.RenderMarkdownArticle(string(bytes))
+	docs[relativeName] = article
+
 }
